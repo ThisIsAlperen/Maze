@@ -1,0 +1,17 @@
+*{
+    box-sizing: border-box;
+}
+.row{
+    margin: 0;
+    --bs-gutter-x:0
+}
+#gameArea{
+    border: 3px solid black;
+    width: 900px;
+    margin: auto;
+    height: 600px;
+    margin-top: 40px;
+}
+.path{
+    background-color: aqua;
+}
