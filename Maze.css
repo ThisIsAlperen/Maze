@@ -14,4 +14,20 @@
 }
 .path{
     background-color: aqua;
+    
+}
+.left{
+    border-left: none!important;
+    
+}
+.right{
+    border-right: none!important;
+}
+.top{
+
+    border-top: none!important;
+    
+}
+.bottom{
+    border-bottom: none!important;
 }
