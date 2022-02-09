@@ -13,21 +13,40 @@
     margin-top: 40px;
 }
 .path{
-    background-color: aqua ;
+    background-color: rgb(96, 118, 219) ;
     
 }
 .left{
-    border-left:1px solid aqua!important;
+    border-left:1px solid white!important;
     
 }
 .right{
-    border-right:1px solid aqua!important;
+    border-right:1px solid white!important;
 }
 .top{
 
-    border-top:1px solid aqua!important;
+    border-top:1px solid white!important;
     
 }
 .bottom{
-    border-bottom: 1px solid aqua!important;
+    border-bottom: 1px solid white!important;
+}
+.container{
+    position: relative;
+}
+#Show{
+    position: absolute;
+    width: 130px;
+    height: 80px;
+    top: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 40px;
+    transition: .3s;
+    border-radius: 15px;
+}
+#Show:hover{
+    background-color: silver;
 }
