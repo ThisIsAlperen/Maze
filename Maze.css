@@ -13,21 +13,21 @@
     margin-top: 40px;
 }
 .path{
-    background-color: aqua;
+    background-color: aqua ;
     
 }
 .left{
-    border-left: none!important;
+    border-left:1px solid aqua!important;
     
 }
 .right{
-    border-right: none!important;
+    border-right:1px solid aqua!important;
 }
 .top{
 
-    border-top: none!important;
+    border-top:1px solid aqua!important;
     
 }
 .bottom{
-    border-bottom: none!important;
+    border-bottom: 1px solid aqua!important;
 }
