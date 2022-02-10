@@ -13,7 +13,7 @@
     margin-top: 40px;
 }
 .path{
-    background-color: rgb(253, 253, 253) ;
+    background-color: rgb(250, 250, 250) ;
     
 }
 .left{
@@ -49,4 +49,20 @@
 }
 #Show:hover{
     background-color: silver;
+}
+.col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle{
+    
+    width: 60%;
+    height: 60%;
+    background-color: rgb(253, 62, 4);
+    border-radius: 50%;
+    text-align: center;
+    
+    margin: auto;
+
 }
