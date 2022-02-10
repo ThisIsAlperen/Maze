@@ -4,10 +4,11 @@ const Area = document.getElementById('gameArea');
 // Easy
 // Medium
 // Hard
-var Size = [15, 10]
+var Size = [60, 40]
 var width = Size[0]
 var height = Size[1]
 var check = true
+
 CreateArea()
 
 // Creating the area
@@ -22,7 +23,7 @@ function CreateArea() {
             col.setAttribute('total', j + ' ' + i)
             col.setAttribute('id', j + '_' + i)
             col.setAttribute('class', 'col box ')
-            col.innerText = j + ' ' + i;
+            
 
             col.style.width = 100 / width + '%'
             col.style.height = '100%'
@@ -36,7 +37,6 @@ function CreateArea() {
 }
 function Choices(x, y) {
     next = [];
-
     n = y - 1;
     s = y + 1;
     e = x + 1;
@@ -54,22 +54,23 @@ function Choices(x, y) {
         console.log('hata')
         if (North == undefined) {
             West = null;
-          
+
         }
         else if (Souht == undefined) {
             West = null;
-         
+
         }
         else if (East == undefined) {
             North = null;
-           
+
         }
         else if (West == undefined) {
             North = null
-            
+
         }
+      
     }
-    
+
 
 
     if (North != null) {
@@ -80,7 +81,7 @@ function Choices(x, y) {
     if (East != null) {
         if (East.classList[2] == undefined && East.getAttribute('dead') == undefined) {
             next.push(East)
-            
+
         }
     }
 
@@ -108,23 +109,28 @@ function CreatePath() {
     AllBoxes[0].className = 'box col path'
     exits = [AllBoxes[0]]
 
-    for (k = 0; k < 200; k++) {
+    for (k = 0; k < 2000; k++) {
         Choices(x, y)
+
         
+
         if (next.length == 0) {
             exits[exits.length - 1].classList.add('dead')
+            exits[exits.length - 1].setAttribute('dead',' ')
             exits[exits.length - 1].classList.remove('path')
             exits.splice(exits.length - 1, 1)
             next = exits[exits.length - 1].getAttribute('total').split(' ')
             previous = exits[exits.length - 1]
-            // minus = minus + 2;
-
+           
         } else {
+            if(k>width/2 + height/2 && next.length>1){
+                
+            }
             r = Math.floor(Math.random() * next.length)
             next[r].className = 'box col path'
 
             Next(next[r])
-            
+
 
         }
 
@@ -135,7 +141,7 @@ function CreatePath() {
             console.log('finish')
             break;
         }
-
+        
 
 
 
@@ -153,7 +159,7 @@ function CreateOthers() {
             empty.push(AllBoxes[i])
         }
     }
-   
+
     while (empty.length > 1) {
 
         r = Math.floor(Math.random() * empty.length)
@@ -162,7 +168,7 @@ function CreateOthers() {
         x = Number(total[0])
         y = Number(total[1])
         Choices(x, y)
-        
+
         if (next.length == 0) {
             empty.splice(r, 1)
             next = previous;
@@ -212,41 +218,63 @@ function Next(x) {
     return next;
 }
 CheckPath()
-function CheckPath(){
+function CheckPath() {
     check = false
     pathBoxes = document.getElementsByClassName('path')
-    for(i=0;i<pathBoxes.length;i++){
+    console.log(pathBoxes)
+    for (i = 0; i < pathBoxes.length; i++) {
         x = pathBoxes[i].getAttribute('total').split(' ')[0]
         y = pathBoxes[i].getAttribute('total').split(' ')[1]
-        Choices(x,y)
+        Choices(x, y)
         console.log(pathBoxes)
-        if(next.length != 0){
-            CreateDetour(x,y)
+        console.log(pathBoxes[i])
+        if (next.length != 0) {
+
+            CreateDetour(x, y)
+
+        }
+        else{
+
         }
     }
 }
-function CreateDetour(x,y){
+function CreateDetour(x, y) {
 
-    console.log(x,y)
+    console.log(x, y)
+    x = Number(x)
+    y = Number(y)
+    first = [Number(x),Number(y)]
+    previous = document.getElementById(x+'_'+y)
+    exit = [document.getElementById(x+'_'+y)]
+    console.log(previous)
     for (k = 0; k < 200; k++) {
         Choices(x, y)
-        
+
         if (next.length == 0) {
-            
+
+            exits[exits.length - 1].classList.add('dead')
+            exits[exits.length - 1].setAttribute('dead',' ')
+            exits.splice(exits.length - 1, 1)
+            next = exits[exits.length - 1].getAttribute('total').split(' ')
+            previous = exits[exits.length - 1]
+           
 
         } else {
             r = Math.floor(Math.random() * next.length)
             next[r].classList.add('dead')
-
+            console.log(next[r])
             Next(next[r])
             
+
 
         }
 
         x = Number(next[0])
         y = Number(next[1])
 
-    
+        if (x == first[0] && x == first[1]) {
+            console.log('Detour')
+            break;
+        }
     }
 }
-
