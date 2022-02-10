@@ -6,7 +6,7 @@ var width = Size[0]
 var height = Size[1]
 
 // check if its on the main path. At Detours it turns to false
-var check = true
+var check = false
 
 // the main path but has some detours because of the deadend
 var way = []
@@ -64,9 +64,11 @@ function CreatePath() {
 
     exits = [AllBoxes[0]]
     way = [AllBoxes[0]]
-
-    for (k = 0; k < 2000; k++) { // function to generate a path. breaks when reach left bottom corner
-
+    k = 0;
+    //for (k = 0; k < 5000; k++) { // function to generate a path. breaks when reach left bottom corner
+    while (x + y != width + height - 2) { // stop when reach to the end (if the total of x and y is equal to the sum of x and y at the end)
+        console.log(x, width - 1)
+        console.log(x, height - 1)
         Choices(x, y) // by using x,y of the box, checks the next choices
 
         if (next.length == 0) { // if there is no next choices;
@@ -91,12 +93,9 @@ function CreatePath() {
 
         x = Number(next[0]) // after choice, changes x and y and make chosen box the current box
         y = Number(next[1])
+        console.log(k)
+        k = k + 1;
 
-        if (x == width - 1 && y == height - 1) { // 
-
-            console.log('Finish')
-            break;
-        }
     }
 
 }
@@ -282,7 +281,7 @@ function CreateDetour(x, y) {
         x = Number(next[0])
         y = Number(next[1])
 
-        if (x == first[0] && x == first[1]) { // breaks if there is no next left
+        if (x == first[0] && y == first[1]) { // breaks if there is no next left
             // controls every box and by coming back when reach to the start point it breaks
 
             break;
@@ -293,16 +292,21 @@ function CreateDetour(x, y) {
 var j = 0;
 
 document.getElementById('Show').onclick = function Show() { // click function to show the path
-    // create circles
+    //create circles
     circle = document.createElement('DIV')
     circle.setAttribute('class', 'circle')
-
     way2[j].appendChild(circle) // add the circles to the way array since it is the right path
 
     if (way2[j].getAttribute('total') == width - 1 + ' ' + height - 1) { // if reach end, returns
-        return
+      return
     }
 
     j = j + 1;
     setTimeout(Show, 100) // goes step by step, runs the code every 0.1 second
+
+    // for (j = 0; j < way2.length; j++) {
+    //     circle = document.createElement('DIV')
+    //     circle.setAttribute('class', 'circle')
+    //     way2[j].appendChild(circle) 
+    // }
 }
