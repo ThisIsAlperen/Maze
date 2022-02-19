@@ -1,7 +1,7 @@
 const Area = document.getElementById('gameArea');
-
+const show = document.getElementById('Show');
 // size of the game area
-var Size = [60, 40]
+var Size = [30, 20]
 var width = Size[0]
 var height = Size[1]
 
@@ -71,7 +71,7 @@ function CreatePath() {
         console.log(x, height - 1)
         Choices(x, y) // by using x,y of the box, checks the next choices
 
-        if (next.length == 0) { // if there is no next choices;
+        if (next.length === 0) { // if there is no next choices;
             exits[exits.length - 1].classList.add('dead') // add dead class to that box 
             exits[exits.length - 1].setAttribute('dead', ' ') // add that attribute to that box
             exits[exits.length - 1].classList.remove('path') // remove path class from taht box
@@ -234,7 +234,7 @@ function CheckPath() {
         y = pathBoxes[i].getAttribute('total').split(' ')[1]
         Choices(x, y) // check if they have a next box
 
-        if (next.length != 0) { // if they have next
+        if (next.length !== 0) { // if they have next
 
             CreateDetour(x, y) // create detour from that next
 
@@ -254,7 +254,7 @@ function CreateDetour(x, y) {
     for (k = 0; k < 200; k++) { // there is no certain and. it tries long enough
         Choices(x, y)
 
-        if (next.length == 0) {
+        if (next.length === 0) {
 
             // do not add path 
 
@@ -290,15 +290,16 @@ function CreateDetour(x, y) {
 
 }
 var j = 0;
-
-document.getElementById('Show').onclick = function Show() { // click function to show the path
+var clicked = false
+show.onclick = function Show() { // click function to show the path
     //create circles
+
     circle = document.createElement('DIV')
     circle.setAttribute('class', 'circle')
     way2[j].appendChild(circle) // add the circles to the way array since it is the right path
 
     if (way2[j].getAttribute('total') == width - 1 + ' ' + height - 1) { // if reach end, returns
-      return
+        return
     }
 
     j = j + 1;
@@ -309,4 +310,7 @@ document.getElementById('Show').onclick = function Show() { // click function to
     //     circle.setAttribute('class', 'circle')
     //     way2[j].appendChild(circle) 
     // }
-}
+    show.disabled = true // disable the show button when it pressed
+
+
+}   
