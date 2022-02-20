@@ -67,8 +67,7 @@ function CreatePath() {
     k = 0;
     //for (k = 0; k < 5000; k++) { // function to generate a path. breaks when reach left bottom corner
     while (x + y != width + height - 2) { // stop when reach to the end (if the total of x and y is equal to the sum of x and y at the end)
-        console.log(x, width - 1)
-        console.log(x, height - 1)
+
         Choices(x, y) // by using x,y of the box, checks the next choices
 
         if (next.length === 0) { // if there is no next choices;
@@ -93,7 +92,7 @@ function CreatePath() {
 
         x = Number(next[0]) // after choice, changes x and y and make chosen box the current box
         y = Number(next[1])
-        console.log(k)
+
         k = k + 1;
 
     }
@@ -263,7 +262,7 @@ function CreateDetour(x, y) {
             exits.splice(exits.length - 1, 1)
 
             if (exits[exits.length - 1] == null) {
-                console.log('null')
+    
                 break;
             }
 
