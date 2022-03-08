@@ -1,9 +1,14 @@
 const Area = document.getElementById('gameArea');
 const show = document.getElementById('Show');
+const run = document.getElementById('run')
+const size = document.getElementById('size')
 // size of the game area
-var Size = [30, 20]
-var width = Size[0]
-var height = Size[1]
+var Size = [3, 2]
+size.value = 10
+
+
+var width = Size[0] * size.value
+var height = Size[1] * size.value
 
 // check if its on the main path. At Detours it turns to false
 var check = false
@@ -14,8 +19,17 @@ var way = []
 // cleared path from detours
 var way2 = []
 
+Run()
+function Run() {
+    console.log(width)
+    CreateArea()
+    CreatePath()
+    Way()
+    CheckPath()
+}
 
-CreateArea()
+
+
 // Creating the area
 function CreateArea() {
     for (i = 0; i < height; i++) {
@@ -52,7 +66,7 @@ function CreateArea() {
     }
 }
 // Main path
-CreatePath()
+
 function CreatePath() {
     var AllBoxes = document.getElementsByClassName('box')
 
@@ -169,7 +183,7 @@ function Choices(x, y) {
 }
 
 
-Way() // after getting the whole path as way array, it should be cleaned from detours.
+// after getting the whole path as way array, it should be cleaned from detours.
 // deadends causes detours 
 function Way() {
     var k = 0;
@@ -223,7 +237,7 @@ function Next(x) {
 // ===== Creating detour ========================================================
 
 // first gets the path boxes and check if they still have an avalible next box
-CheckPath()
+
 function CheckPath() {
     check = false // no need to reach end (line 119)
     pathBoxes = document.getElementsByClassName('path')
@@ -262,7 +276,7 @@ function CreateDetour(x, y) {
             exits.splice(exits.length - 1, 1)
 
             if (exits[exits.length - 1] == null) {
-    
+
                 break;
             }
 
@@ -290,9 +304,15 @@ function CreateDetour(x, y) {
 }
 var j = 0;
 var clicked = false
-show.onclick = function Show() { // click function to show the path
-    //create circles
+var correctPath;
+show.addEventListener('click', function(){
+    correctPath = setInterval(Show, 100);
+    console.log(way2)
+})  // click function to show the path
+    
 
+ function Show(){
+    //create circles
     circle = document.createElement('DIV')
     circle.setAttribute('class', 'circle')
     way2[j].appendChild(circle) // add the circles to the way array since it is the right path
@@ -302,7 +322,7 @@ show.onclick = function Show() { // click function to show the path
     }
 
     j = j + 1;
-    setTimeout(Show, 100) // goes step by step, runs the code every 0.1 second
+     // goes step by step, runs the code every 0.1 second
 
     // for (j = 0; j < way2.length; j++) {
     //     circle = document.createElement('DIV')
@@ -310,6 +330,20 @@ show.onclick = function Show() { // click function to show the path
     //     way2[j].appendChild(circle) 
     // }
     show.disabled = true // disable the show button when it pressed
-
-
-}   
+}
+function Clear(){
+    Area.innerHTML = ""
+    way = []
+    way2 = []
+    
+}
+run.onclick = function () {
+    
+    show.disabled = false
+    clearInterval(correctPath)
+    Clear()
+    check = false
+    width = Size[0]*size.value
+    height = Size[1]*size.value
+    Run()
+}
