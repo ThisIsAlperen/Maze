@@ -305,9 +305,11 @@ function CreateDetour(x, y) {
 var j = 0;
 var clicked = false
 var correctPath;
+
 show.addEventListener('click', function(){
+    j = 0;
     correctPath = setInterval(Show, 100);
-    console.log(way2)
+    
 })  // click function to show the path
     
 
@@ -316,7 +318,7 @@ show.addEventListener('click', function(){
     circle = document.createElement('DIV')
     circle.setAttribute('class', 'circle')
     way2[j].appendChild(circle) // add the circles to the way array since it is the right path
-
+    console.log(j)
     if (way2[j].getAttribute('total') == width - 1 + ' ' + height - 1) { // if reach end, returns
         return
     }
@@ -335,7 +337,7 @@ function Clear(){
     Area.innerHTML = ""
     way = []
     way2 = []
-    
+    j = 0;
 }
 run.onclick = function () {
     
